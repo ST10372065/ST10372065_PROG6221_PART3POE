@@ -24,5 +24,24 @@ namespace ST10372065_PROG6221_PART3POE
         {
             InitializeComponent();
         }
+        private void btnEnterIngredsandSteps_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void SearchIngred_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void SearchFoodGroup_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

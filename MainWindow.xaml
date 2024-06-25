@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ST10372065_PROG6221_PART3POE"
         mc:Ignorable="d"
-            Title="Menu" Height="700" Width="1350">
-    <Grid Background="Aquamarine" HorizontalAlignment="Left" Height="131" Margin="10,10,0,0" VerticalAlignment="Top" Width="1254">
+        Title="Menu" Height="700" Width="1350">
+    <Grid>
+        <Grid Background="Aquamarine" HorizontalAlignment="Left" Height="131" Margin="10,10,0,0" VerticalAlignment="Top" Width="1254">
             <Label Content="Please Enter the Name of the Recipe:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="228"/>
             <Label x:Name="lblNumIngreds" Content="Please Enter The Number of Ingredients:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="228"/>
             <Label Content="Please Enter the Number of Steps:" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top"/>
@@ -14,6 +15,32 @@
             <Button x:Name="btnEnterIngredsandSteps" Content="Enter Ingredients and Steps" HorizontalAlignment="Left" Margin="482,38,0,0" VerticalAlignment="Top" Width="159" Height="41" Click="btnEnterIngredsandSteps_Click" />
             <TextBox x:Name="textBoxnumSteps" HorizontalAlignment="Left" Height="23" Margin="243,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>
             <TextBox x:Name="textboxRecipeName" HorizontalAlignment="Left" Height="23" Margin="243,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>
-
+            <Grid HorizontalAlignment="Left" Height="108" Margin="906,23,0,0" VerticalAlignment="Top" Width="348">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="24*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Ingredient" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
+                <Label Content="Food Group" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
+                <Label Content="Maximum Calories" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="115" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="textboxMaxCal" HorizontalAlignment="Left" Height="23" Margin="84,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119" Grid.Column="1"/>
+                <Button x:Name="SearchIngred" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,13,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Click="SearchIngred_Click" />
+                <TextBox x:Name="textboxsearchIngred" HorizontalAlignment="Left" Height="23" Margin="84,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119" Grid.Column="1"/>
+                <Button x:Name="SearchFoodGroup" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,44,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Click="SearchFoodGroup_Click" />
+                <Button x:Name="SearchMaxCal" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,76,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" />
+                <ComboBox x:Name="comboboxsearchFoodGroup" HorizontalAlignment="Left" Margin="84,44,0,0" VerticalAlignment="Top" Width="119" Grid.Column="1">
+                    <ComboBoxItem>Vegetables</ComboBoxItem>
+                    <ComboBoxItem>Fruits</ComboBoxItem>
+                    <ComboBoxItem>Grains</ComboBoxItem>
+                    <ComboBoxItem>Protein Foods</ComboBoxItem>
+                    <ComboBoxItem>Dairy</ComboBoxItem>
+                    <ComboBoxItem>Oils and Solid Fats</ComboBoxItem>
+                    <ComboBoxItem>Added Sugars</ComboBoxItem>
+                    <ComboBoxItem>Beverages</ComboBoxItem>
+                </ComboBox>
+            </Grid>
+            <Label Content="FILTERS" FontSize="15" HorizontalAlignment="Left" Margin="915,6,0,0" VerticalAlignment="Top" Width="92"/>
+            <Button Background="Red" Content="EXIT" Margin="1179,0,0,110" Click="Button_Click" />
         </Grid>
+    </Grid>
 </Window>
