@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ST10372065_PROG6221_PART3POE"
         mc:Ignorable="d"
-        Title="Menu" Height="700" Width="1350">
+        Title="Menu" Height="700" Width="1290"
+        ResizeMode="NoResize">
     <Grid>
         <Grid Background="Aquamarine" HorizontalAlignment="Left" Height="131" Margin="10,10,0,0" VerticalAlignment="Top" Width="1254">
             <Label Content="Please Enter the Name of the Recipe:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="228"/>
@@ -20,15 +21,15 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="24*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Ingredient" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
-                <Label Content="Food Group" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2"/>
-                <Label Content="Maximum Calories" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="115" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="textboxMaxCal" HorizontalAlignment="Left" Height="23" Margin="84,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119" Grid.Column="1"/>
-                <Button x:Name="SearchIngred" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,13,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Click="SearchIngred_Click" />
-                <TextBox x:Name="textboxsearchIngred" HorizontalAlignment="Left" Height="23" Margin="84,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119" Grid.Column="1"/>
-                <Button x:Name="SearchFoodGroup" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,44,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Click="SearchFoodGroup_Click" />
-                <Button x:Name="SearchMaxCal" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,76,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" />
-                <ComboBox x:Name="comboboxsearchFoodGroup" HorizontalAlignment="Left" Margin="84,44,0,0" VerticalAlignment="Top" Width="119" Grid.Column="1">
+                <Label x:Name="LabelIngredient" Content="Ingredient" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2" Visibility="Collapsed"/>
+                <Label x:Name="LabelFoodGroup" Content="Food Group" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="106" Grid.ColumnSpan="2" Visibility="Collapsed"/>
+                <Label x:Name="LabelMaxCalories" Content="Maximum Calories" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="115" Grid.ColumnSpan="2" Visibility="Collapsed"/>
+                <TextBox x:Name="textboxMaxCal" HorizontalAlignment="Left" Height="23" Margin="84,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119" Grid.Column="1" Visibility="Collapsed"/>
+                <Button x:Name="SearchIngred" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,13,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Click="SearchIngred_Click" Visibility="Collapsed"/>
+                <TextBox x:Name="textboxsearchIngred" HorizontalAlignment="Left" Height="23" Margin="84,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119" Grid.Column="1" Visibility="Collapsed"/>
+                <Button x:Name="SearchFoodGroup" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,44,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Click="SearchFoodGroup_Click" Visibility="Collapsed"/>
+                <Button x:Name="SearchMaxCal" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,76,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Visibility="Collapsed" />
+                <ComboBox x:Name="comboboxsearchFoodGroup" HorizontalAlignment="Left" Margin="84,44,0,0" VerticalAlignment="Top" Width="119" Grid.Column="1" Visibility="Collapsed">
                     <ComboBoxItem>Vegetables</ComboBoxItem>
                     <ComboBoxItem>Fruits</ComboBoxItem>
                     <ComboBoxItem>Grains</ComboBoxItem>
@@ -39,8 +40,14 @@
                     <ComboBoxItem>Beverages</ComboBoxItem>
                 </ComboBox>
             </Grid>
-            <Label Content="FILTERS" FontSize="15" HorizontalAlignment="Left" Margin="915,6,0,0" VerticalAlignment="Top" Width="92"/>
+            <Label x:Name="LabelFilters" Content="FILTERS" FontSize="15" HorizontalAlignment="Left" Margin="915,6,0,0" VerticalAlignment="Top" Width="92" Visibility="Collapsed"/>
             <Button Background="Red" Content="EXIT" Margin="1179,0,0,110" Click="Button_Click" />
         </Grid>
+        <StackPanel HorizontalAlignment="Left" Height="367" Margin="10,146,0,0" VerticalAlignment="Top" Width="922">
+            <ScrollViewer x:Name="scrollDisplay" Height="366" Background="LightGray">
+                <StackPanel x:Name="pnlDisplay" Height="328" Width="1233"/>
+            </ScrollViewer>
+        </StackPanel>
+        
     </Grid>
 </Window>
