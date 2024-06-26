@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,7 +17,7 @@ namespace ST10372065_PROG6221_PART3POE
         List<IngredientDetails> ingredients = new List<IngredientDetails>();
         List<StepDetails> listDescription = new List<StepDetails>();
 
-
+        double scalingFactot = 1;
         public MainWindow()
         {
             InitializeComponent();
@@ -150,7 +151,24 @@ namespace ST10372065_PROG6221_PART3POE
 
         private void SearchIngredient_Click(object sender, RoutedEventArgs e)
         {
+            string searchIngredient = textboxsearchIngred.Text;
+            textBlockDisplay.Text = string.Empty;
+            List<Recipe> filteredRecipes = recipes.Where(recipe =>recipe.Ingredients.Any(ingredient =>ingredient.textboxIngredName.Text.Equals(searchIngredient, StringComparison.OrdinalIgnoreCase))).ToList();
 
+            if (filteredRecipes.Count > 0)
+            {
+                StringBuilder recipeListBuilder = new StringBuilder();
+                for (int i = 0; i < filteredRecipes.Count; i++)
+                {
+                    recipeListBuilder.AppendLine
+                        ($"{i + 1}.{filteredRecipes[i].RecipeName}");
+                }
+                textBlockDisplay.Text = recipeListBuilder.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Recipe not found");
+            }
         }
 
         private void SearchFoodGroup_Click(object sender, RoutedEventArgs e)
@@ -172,12 +190,26 @@ namespace ST10372065_PROG6221_PART3POE
 
         private void btnDisplayAllNames_Click(object sender, RoutedEventArgs e)
         {
-            
+            textBlockDisplay.Text = DisplayRecipeNameMethod();
+        }
+        public string DisplayRecipeNameMethod()
+        {
+            StringBuilder recipeBuilder = new StringBuilder();
+            recipeBuilder.AppendLine("Recipe Names: \n");
+            int nameCount = 1;
+            foreach (var item in recipes)
+            {
+                recipeBuilder.AppendLine($"{nameCount}{" :"}{item.RecipeName}");
+                nameCount++;
+            }
+            return recipeBuilder.ToString();
         }
 
         private void btnScale_Click(object sender, RoutedEventArgs e)
         {
-           
+            gridRecipeNumber.Visibility = Visibility.Visible;
+            gridScaleValue.Visibility = Visibility.Visible;
+            btnScaleNext.Visibility = Visibility.Visible;
         }
 
         private void btnsaveanddisplay_Click(object sender, RoutedEventArgs e)

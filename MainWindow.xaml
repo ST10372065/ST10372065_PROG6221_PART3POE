@@ -68,6 +68,6 @@
             <Button x:Name="btnDeleteNext" Visibility="Hidden" Content="Delete" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" />
             <Button x:Name="btnResetNext" Visibility="Hidden" Content="Reset" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" />
         </Grid>
-        <TextBlock x:Name="textBlockDisplay" Background="PowderBlue" TextWrapping="Wrap" Margin="937,146,26,171"/>
+        <TextBlock x:Name="textBlockDisplay" Background="PowderBlue" Height="382" TextWrapping="Wrap" Margin="937,146,26,171"/>
     </Grid>
 </Window>
