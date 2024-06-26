@@ -17,7 +17,7 @@ namespace ST10372065_PROG6221_PART3POE
         List<IngredientDetails> ingredients = new List<IngredientDetails>();
         List<StepDetails> listDescription = new List<StepDetails>();
 
-        double scalingFactot = 1;
+        double scalingFactor;
         public MainWindow()
         {
             InitializeComponent();
@@ -78,7 +78,7 @@ namespace ST10372065_PROG6221_PART3POE
             {
                 recipeListBuilder.AppendLine($"{i + 1}. {recipes[i].RecipeName}");
                 double totalCalories = 0;
-                recipeListBuilder.AppendLine("\nIngredients:");
+                recipeListBuilder.AppendLine("\nIngredients: ");
                 int count = 1;
                 foreach (var ingredient in recipes[i].Ingredients)
                 {
@@ -105,6 +105,49 @@ namespace ST10372065_PROG6221_PART3POE
                 }
             }
             textBlockDisplay.Text = recipeListBuilder.ToString();
+        }
+
+        public string GetFormattedRecipeDisplay(int displayRecChoice)
+        {
+            StringBuilder recipeBuilder = new StringBuilder();
+            recipeBuilder.AppendLine("Recipe Name: ");
+
+            var selectedRecipe = recipes[displayRecChoice - 1];
+            int count = 1;
+            recipeBuilder.AppendLine(selectedRecipe.RecipeName);
+            recipeBuilder.AppendLine("\nIngredients: ");
+            double totalCalories = 0;
+            count = 1;
+
+            foreach (var ingredient in selectedRecipe.Ingredients)
+            {
+                recipeBuilder.AppendLine($"{count}) {ingredient.textboxQuantity.Text} {ingredient.textboxUnit.Text} of {ingredient.textboxIngredName.Text}(Calories: {ingredient.textboxCalories.Text}) (Food Group: {ingredient.comboFoodGroup.Text})");
+                count++; 
+                totalCalories = totalCalories + int.Parse(ingredient.textboxCalories.Text);
+                recipeBuilder.Append($"");
+            }
+
+            recipeBuilder.AppendLine($"Total Calories: {totalCalories}");
+            recipeBuilder.AppendLine();
+            recipeBuilder.AppendLine("Steps: ");
+
+            count = 1;
+            foreach (var step in selectedRecipe.Steps)
+            {
+                recipeBuilder.AppendLine($"{count}) {step.textboxSteps.Text}");
+                count++;
+            }
+
+            if(totalCalories > 300)
+            {
+                recipeBuilder.AppendLine($"YOU HAVE EXCEEDED YOUR CALORIE INTAKE OF 300!!!\nConsuming large amounts of calories can be harmful to your health\nPlease try scaling the recipe by 0,5");
+            }
+            else
+            {
+                recipeBuilder.AppendLine($"\nThis recipe is under 300 calories, which is a healthy calorie limit for a meal. Eating meals under 300 calories can aid in weight loss, and can also improve mental health.");
+            }
+
+            return recipeBuilder.ToString();
         }
 
         private void btnEnterIngredsandSteps_Click(object sender, RoutedEventArgs e)
@@ -146,7 +189,6 @@ namespace ST10372065_PROG6221_PART3POE
                     AddSteps();
                 }
             }
-            //TextBoxnumSteps.Text= string.Empty; 
         }
 
         private void SearchIngredient_Click(object sender, RoutedEventArgs e)
@@ -212,6 +254,64 @@ namespace ST10372065_PROG6221_PART3POE
             btnScaleNext.Visibility = Visibility.Visible;
         }
 
+        public void ScaleRecipe(int recipeIndex, double scalingFactor)
+        {
+            if (recipeIndex >= 0 && recipeIndex < recipes.Count)
+            {
+                Recipe recipe = recipes[recipeIndex];
+                foreach (var ingredient in recipe.Ingredients)
+                {
+                    if (double.TryParse(ingredient.textboxQuantity.Text, out double originalQuantity))
+                    {
+                        string unit = ingredient.textboxUnit.Text.ToLower();
+                        double scaledQuantity = originalQuantity * scalingFactor; // Correctly apply scaling factor here
+                        string newUnit = unit;
+
+                        // Conversion logic for tablespoons and cups
+                        if (unit.Equals("tablespoons", StringComparison.OrdinalIgnoreCase) || unit.Equals("tablespoon", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Convert to cups if applicable
+                            if (scaledQuantity >= 16)
+                            {
+                                newUnit = "cups";
+                                scaledQuantity /= 16; // Convert tablespoons to cups
+                            }
+                        }
+                        else if (unit.Equals("cups", StringComparison.OrdinalIgnoreCase) || unit.Equals("cup", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Convert to tablespoons if scaled quantity is less than 1 cup, this part remains unchanged as the issue was not here
+                            if (scaledQuantity < 1)
+                            {
+                                newUnit = "tablespoons";
+                                scaledQuantity *= 16; // Convert cups to tablespoons
+                            }
+                        }
+                        // Conversion logic for teaspoons to tablespoons
+                        else if (unit.Equals("teaspoons", StringComparison.OrdinalIgnoreCase) || unit.Equals("teaspoon", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Convert to tablespoons if applicable
+                            if (scaledQuantity >= 3)
+                            {
+                                newUnit = "tablespoons";
+                                scaledQuantity /= 3; // Convert teaspoons to tablespoons
+                            }
+                        }
+
+                        // Update the ingredient with the new quantity and unit
+                        ingredient.textboxQuantity.Text = scaledQuantity.ToString("0.##");
+                        ingredient.textboxUnit.Text = newUnit;
+
+                        // Assuming calories scale linearly with quantity
+                        if (double.TryParse(ingredient.textboxCalories.Text, out double calories))
+                        {
+                            ingredient.textboxCalories.Text = (calories * scalingFactor).ToString("0.##");
+                        }
+                    }
+                }
+                textBlockDisplay.Text = GetFormattedRecipeDisplay(recipeIndex + 1);
+            }
+        }
+
         private void btnsaveanddisplay_Click(object sender, RoutedEventArgs e)
         {
             SearchIngred.IsEnabled = true;
@@ -242,12 +342,65 @@ namespace ST10372065_PROG6221_PART3POE
 
         private void btnDisplayRecCont_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (int.TryParse(textboxDisplayrecChoice.Text, out int displayRecChoice))
+            {
+                if(displayRecChoice >= 1 && displayRecChoice <= recipes.Count)
+                {
+                    Recipe selectedRecipe = recipes[displayRecChoice - 1];
+                    textBlockDisplay.Text = GetFormattedRecipeDisplay(displayRecChoice);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid recipe number", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                    textBlockDisplay.Text = "Invalid recipe number";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid recipe number", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            gridRecipeNumber.Visibility = Visibility.Hidden;
+            gridScaleValue.Visibility = Visibility.Hidden;
+            btnDisplayRecCont.Visibility = Visibility.Hidden;
         }
 
         private void btnScaleNext_Click(object sender, RoutedEventArgs e)
         {
+            if (int.TryParse(textboxDisplayrecChoice.Text, out int displayRecChoice))
+            {
+                if (displayRecChoice > 0 && displayRecChoice <= recipes.Count)
+                {
+                    if (double.TryParse(textboxScaleNumber.Text, out double scaleNumber))
+                    {
+                        // Validate the scaling factor to be 0.5, 2, or 3
+                        if (scaleNumber == 0.5 || scaleNumber == 2 || scaleNumber == 3)
+                        {
+                            ScaleRecipe(displayRecChoice - 1, scaleNumber);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid scaling factor. Please enter 0.5, 2, or 3.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid scaling factor", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid recipe number", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid recipe number", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
+            gridRecipeNumber.Visibility = Visibility.Hidden;
+            gridScaleValue.Visibility = Visibility.Hidden;
+            btnScaleNext.Visibility = Visibility.Hidden;
         }
     }
 }
