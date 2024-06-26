@@ -189,6 +189,7 @@ namespace ST10372065_PROG6221_PART3POE
                     AddSteps();
                 }
             }
+            textBoxnumSteps.Text = string.Empty;
         }
 
         private void SearchIngredient_Click(object sender, RoutedEventArgs e)
@@ -202,8 +203,7 @@ namespace ST10372065_PROG6221_PART3POE
                 StringBuilder recipeListBuilder = new StringBuilder();
                 for (int i = 0; i < filteredRecipes.Count; i++)
                 {
-                    recipeListBuilder.AppendLine
-                        ($"{i + 1}.{filteredRecipes[i].RecipeName}");
+                    recipeListBuilder.AppendLine($"{i + 1}.{filteredRecipes[i].RecipeName}");
                 }
                 textBlockDisplay.Text = recipeListBuilder.ToString();
             }
@@ -215,7 +215,46 @@ namespace ST10372065_PROG6221_PART3POE
 
         private void SearchFoodGroup_Click(object sender, RoutedEventArgs e)
         {
+            if (comboboxsearchFoodGroup.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a food group first.");
+                return;
+            }
 
+            ComboBoxItem selectedFoodGroupItem = comboboxsearchFoodGroup.SelectedItem as ComboBoxItem;
+            string selectedFoodGroup = selectedFoodGroupItem.Content.ToString();
+
+            List<Recipe> matchingRecipes = new List<Recipe>();
+
+            for (int i = 0; i < recipes.Count; i++)
+            {
+                for(int j = 0; j < recipes[i].Ingredients.Count; j++)
+                {
+                    if (recipes[i].Ingredients[j].comboFoodGroup.Text == selectedFoodGroup)
+                    {
+                        
+                        matchingRecipes.Add(recipes[i]);
+                        break;
+                    }
+                }
+            }
+
+            if (matchingRecipes.Any())
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine($"Recipes containing {selectedFoodGroup}:");
+
+                foreach (var recipe in matchingRecipes)
+                {
+                    sb.AppendLine(recipe.RecipeName);
+                }
+
+                textBlockDisplay.Text = sb.ToString();
+            }
+            else
+            {
+                textBlockDisplay.Text = $"No recipes found containing {selectedFoodGroup}.";
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -318,11 +357,14 @@ namespace ST10372065_PROG6221_PART3POE
             SearchFoodGroup.IsEnabled = true;
             SearchMaxCal.IsEnabled = true;
 
+
             Recipe newRecipe = new Recipe();
             newRecipe.RecipeName = textboxRecipeName.Text;
             newRecipe.Ingredients.AddRange(ingredients);
             newRecipe.Steps.AddRange(listDescription);
             recipes.Add(newRecipe);
+
+
 
             textboxRecipeName.Text = string.Empty;
             pnlDisplay.Children.Clear();

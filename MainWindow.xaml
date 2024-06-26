@@ -13,9 +13,9 @@
             <Label x:Name="lblNumIngreds" Content="Please Enter The Number of Ingredients:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="228"/>
             <Label Content="Please Enter the Number of Steps:" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="textboxNumIngreds" HorizontalAlignment="Left" Height="23" Margin="243,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>
-            <Button x:Name="btnEnterIngredsandSteps" Content="Enter Ingredients and Steps" HorizontalAlignment="Left" Margin="482,38,0,0" VerticalAlignment="Top" Width="159" Height="41" Click="btnEnterIngredsandSteps_Click" />
             <TextBox x:Name="textBoxnumSteps" HorizontalAlignment="Left" Height="23" Margin="243,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>
             <TextBox x:Name="textboxRecipeName" HorizontalAlignment="Left" Height="23" Margin="243,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>
+            <Button x:Name="btnEnterIngredsandSteps" Content="Enter Ingredients and Steps" HorizontalAlignment="Left" Margin="482,38,0,0" VerticalAlignment="Top" Width="159" Height="41" Click="btnEnterIngredsandSteps_Click" />
             <Grid HorizontalAlignment="Left" Height="108" Margin="906,23,0,0" VerticalAlignment="Top" Width="348">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>

@@ -17,6 +17,7 @@ namespace ST10372065_PROG6221_PART3POE
             this.textboxUnit = textboxUnit;
             this.textboxCalories = textboxCalories;
             this.comboFoodGroup = comboFoodGroup;
+            this.FoodGroup = comboFoodGroup.SelectedItem as ComboBoxItem;
         }
 
 
@@ -26,5 +27,6 @@ namespace ST10372065_PROG6221_PART3POE
         public TextBox textboxUnit { get; set; }
         public TextBox textboxCalories { get; set; }
         public ComboBox comboFoodGroup { get; set; }
+        public ComboBoxItem FoodGroup { get; set; }
     }
 }
