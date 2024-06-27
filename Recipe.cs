@@ -30,11 +30,8 @@ namespace ST10372065_PROG6221_PART3POE
         {
             foreach (var ingredient in Ingredients)
             {
-                // Assuming IngredientDetails has methods or properties to reset to original values
-                // You would need to adjust this based on your actual implementation
                 ingredient.Unit = ingredient.OriginalUnit;
                 ingredient.Quantity = ingredient.OriginalQuantity;
-                
             }
         }
     }

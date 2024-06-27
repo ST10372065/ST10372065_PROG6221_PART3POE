@@ -53,9 +53,10 @@
             <Button x:Name="btnDisplayAllNames" IsEnabled="False" Content="Display Recipe Names" HorizontalAlignment="Left" Margin="148,35,0,0" VerticalAlignment="Top" Width="126" Click="btnDisplayAllNames_Click" />
             <Button x:Name="btnScale" IsEnabled="False" Content="Scale" HorizontalAlignment="Left" Margin="279,35,0,0" VerticalAlignment="Top" Width="126" Click="btnScale_Click" />
             <Button x:Name="btnReset" IsEnabled="False" Content="Reset" HorizontalAlignment="Left" Margin="410,35,0,0" VerticalAlignment="Top" Width="126" Click="btnReset_Click" />
-            <Button x:Name="btnDelete" IsEnabled="False" Content="Delete" HorizontalAlignment="Left" Margin="541,35,0,0" VerticalAlignment="Top" Width="126" />
+            <Button x:Name="btnDelete" IsEnabled="False" Content="Delete" HorizontalAlignment="Left" Margin="541,35,0,0" VerticalAlignment="Top" Width="126" Click="btnDelete_Click" />
             <Button x:Name="btnsaveanddisplay" Content="SAVE AND DISPLAY" IsEnabled="False" HorizontalAlignment="Left" Margin="719,-480,0,0" VerticalAlignment="Top" Width="144" Height="68" Click="btnsaveanddisplay_Click" Visibility="Collapsed" />
             <Button x:Name="btnDisplayRecCont" Visibility="Hidden" Content="Display" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" Click="btnDisplayRecCont_Click"/>
+            <Button x:Name="btnDeleteRecipe" Visibility="Hidden" Content="Delete" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" Click="btnDeleteRecipe_Click"/>
             <Grid x:Name="gridRecipeNumber" Visibility="Hidden" HorizontalAlignment="Left" Height="40" Margin="740,0,0,0" VerticalAlignment="Top" Width="349">
                 <Label Content="Please Enter the Recipe Number" HorizontalAlignment="Left" Margin="-4,7,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="textboxDisplayrecChoice" Visibility="Visible" HorizontalAlignment="Left" Height="23" Margin="181,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158"/>
@@ -64,9 +65,13 @@
                 <TextBox x:Name="textboxScaleNumber" HorizontalAlignment="Left" Height="23" Margin="180,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159"/>
                 <Label Content="Please Enter the Scale Value" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="157"/>
             </Grid>
+            <Grid x:Name="gridDelete" Visibility="Hidden" HorizontalAlignment="Left" Height="44" Margin="740,1,0,0" VerticalAlignment="Top" Width="349">
+                <TextBox x:Name="textboxDeleteRecipe" HorizontalAlignment="Left" Height="23" Margin="180,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159"/>
+                <Label Content="Please Enter the Recipe Number to Delete" HorizontalAlignment="Left" VerticalAlignment="Center" Width="240" Margin="-60,0,0,0"/>
+            </Grid>
             <Button x:Name="btnScaleNext" Visibility="Hidden" Content="Scale" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" Click="btnScaleNext_Click" />
             <Button x:Name="btnDeleteNext" Visibility="Hidden" Content="Delete" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" />
-            <Button x:Name="btnResetNext" Visibility="Hidden" Content="Reset" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" />
+            <Button x:Name="batnResetNext" Visibility="Hidden" Content="Reset" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" />
         </Grid>
         <TextBlock x:Name="textBlockDisplay" Background="PowderBlue" Height="390" TextWrapping="Wrap" Margin="937,146,26,171"/>
     </Grid>

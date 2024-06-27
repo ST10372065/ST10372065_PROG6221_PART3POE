@@ -36,8 +36,8 @@ namespace ST10372065_PROG6221_PART3POE
             stepPanel.Children.Add(textboxSteps);
             listDescription.Add(new StepDetails(textboxSteps));
             pnlDisplay.Children.Add(stepPanel);
-
         }
+
         public void AddIngreds()
         {
             StackPanel ingredientPanel = new StackPanel()
@@ -70,7 +70,6 @@ namespace ST10372065_PROG6221_PART3POE
             ingredientPanel.Children.Add(comboFoodGroup);
             ingredients.Add(new IngredientDetails(textboxIngredName, textboxQuantity, textboxUnit, textboxCalories, comboFoodGroup));
             pnlDisplay.Children.Add(ingredientPanel);
-
             
         }
 
@@ -453,20 +452,12 @@ namespace ST10372065_PROG6221_PART3POE
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
-            // Check if there are any recipes in the list
-            if (recipes.Count == 0)
-            {
-                textBlockDisplay.Text = "No recipes found. Please enter a recipe first.";
-                return;
-            }
-
-            // Reset each recipe's ingredients to their original values
             foreach (var recipe in recipes)
             {
                 recipe.ResetIngredientsToOriginal();
             }
 
-            MessageBox.Show("All recipes have been reset to their original ingredient quantities and units.");
+            UpdateRecipeListTextBlock();
         }
 
         private void SearchMaxCalories_Click(object sender, RoutedEventArgs e)
@@ -498,5 +489,33 @@ namespace ST10372065_PROG6221_PART3POE
                 textBlockDisplay.Text = "Please enter a valid number for maximum calories";
             }
         }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            gridDelete.Visibility = Visibility.Visible;
+            textboxDeleteRecipe.Visibility = Visibility.Visible;
+            btnDeleteRecipe.Visibility = Visibility.Visible;
+        }
+
+        private void btnDeleteRecipe_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(textboxDeleteRecipe.Text, out int recipeNumber) && recipeNumber >= 1 && recipeNumber <= recipes.Count)
+            {
+                int recipeIndex = recipeNumber - 1;
+
+                recipes.RemoveAt(recipeIndex);
+
+                textBlockDisplay.Text = "Recipe deleted successfully.";
+
+                textboxDeleteRecipe.Clear();
+
+                UpdateRecipeListTextBlock();
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid recipe number.");
+            }
+        }
+
     }
 }
