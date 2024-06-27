@@ -55,10 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HomeScreen.xaml.cs">
+      <DependentUpon>HomeScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IngredientDetails.cs" />
     <Compile Include="Recipe.cs" />
     <Compile Include="RecipeName.cs" />
     <Compile Include="StepDetails.cs" />
+    <Page Include="HomeScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

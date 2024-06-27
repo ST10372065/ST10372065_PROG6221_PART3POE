@@ -28,7 +28,7 @@
                 <Button x:Name="SearchIngred" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,13,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Click="SearchIngredient_Click" Visibility="Collapsed"/>
                 <TextBox x:Name="textboxsearchIngred" HorizontalAlignment="Left" Height="23" Margin="84,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="119" Grid.Column="1" Visibility="Collapsed"/>
                 <Button x:Name="SearchFoodGroup" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,44,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Click="SearchFoodGroup_Click" Visibility="Collapsed"/>
-                <Button x:Name="SearchMaxCal" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,76,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Visibility="Collapsed" />
+                <Button x:Name="SearchMaxCal" IsEnabled="False" Content="Search" HorizontalAlignment="Left" Margin="208,76,0,0" VerticalAlignment="Top" Width="70" Height="23" Grid.Column="1" Click="SearchMaxCalories_Click"  Visibility="Collapsed"/>
                 <ComboBox x:Name="comboboxsearchFoodGroup" HorizontalAlignment="Left" Margin="84,44,0,0" VerticalAlignment="Top" Width="119" Grid.Column="1" Visibility="Collapsed">
                     <ComboBoxItem>Vegetables</ComboBoxItem>
                     <ComboBoxItem>Fruits</ComboBoxItem>
@@ -52,7 +52,7 @@
             <Button x:Name="btnDisplayRecipe" IsEnabled="False" Content="Display Recipe" HorizontalAlignment="Left" Margin="28,35,0,0" VerticalAlignment="Top" Width="115" Click="btnDisplayRecipe_Click"/>
             <Button x:Name="btnDisplayAllNames" IsEnabled="False" Content="Display Recipe Names" HorizontalAlignment="Left" Margin="148,35,0,0" VerticalAlignment="Top" Width="126" Click="btnDisplayAllNames_Click" />
             <Button x:Name="btnScale" IsEnabled="False" Content="Scale" HorizontalAlignment="Left" Margin="279,35,0,0" VerticalAlignment="Top" Width="126" Click="btnScale_Click" />
-            <Button x:Name="btnReset" IsEnabled="False" Content="Reset" HorizontalAlignment="Left" Margin="410,35,0,0" VerticalAlignment="Top" Width="126" />
+            <Button x:Name="btnReset" IsEnabled="False" Content="Reset" HorizontalAlignment="Left" Margin="410,35,0,0" VerticalAlignment="Top" Width="126" Click="btnReset_Click" />
             <Button x:Name="btnDelete" IsEnabled="False" Content="Delete" HorizontalAlignment="Left" Margin="541,35,0,0" VerticalAlignment="Top" Width="126" />
             <Button x:Name="btnsaveanddisplay" Content="SAVE AND DISPLAY" IsEnabled="False" HorizontalAlignment="Left" Margin="719,-480,0,0" VerticalAlignment="Top" Width="144" Height="68" Click="btnsaveanddisplay_Click" Visibility="Collapsed" />
             <Button x:Name="btnDisplayRecCont" Visibility="Hidden" Content="Display" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" Click="btnDisplayRecCont_Click"/>
@@ -68,6 +68,6 @@
             <Button x:Name="btnDeleteNext" Visibility="Hidden" Content="Delete" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" />
             <Button x:Name="btnResetNext" Visibility="Hidden" Content="Reset" HorizontalAlignment="Left" Margin="1120,10,0,0" VerticalAlignment="Top" Width="126" Height="69" />
         </Grid>
-        <TextBlock x:Name="textBlockDisplay" Background="PowderBlue" Height="382" TextWrapping="Wrap" Margin="937,146,26,171"/>
+        <TextBlock x:Name="textBlockDisplay" Background="PowderBlue" Height="390" TextWrapping="Wrap" Margin="937,146,26,171"/>
     </Grid>
 </Window>

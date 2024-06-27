@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -69,6 +70,8 @@ namespace ST10372065_PROG6221_PART3POE
             ingredientPanel.Children.Add(comboFoodGroup);
             ingredients.Add(new IngredientDetails(textboxIngredName, textboxQuantity, textboxUnit, textboxCalories, comboFoodGroup));
             pnlDisplay.Children.Add(ingredientPanel);
+
+            
         }
 
         public void UpdateRecipeListTextBlock()
@@ -190,6 +193,8 @@ namespace ST10372065_PROG6221_PART3POE
                 }
             }
             textBoxnumSteps.Text = string.Empty;
+
+            textBlockDisplay.Text = "";
         }
 
         private void SearchIngredient_Click(object sender, RoutedEventArgs e)
@@ -232,7 +237,6 @@ namespace ST10372065_PROG6221_PART3POE
                 {
                     if (recipes[i].Ingredients[j].comboFoodGroup.Text == selectedFoodGroup)
                     {
-                        
                         matchingRecipes.Add(recipes[i]);
                         break;
                     }
@@ -357,7 +361,6 @@ namespace ST10372065_PROG6221_PART3POE
             SearchFoodGroup.IsEnabled = true;
             SearchMaxCal.IsEnabled = true;
 
-
             Recipe newRecipe = new Recipe();
             newRecipe.RecipeName = textboxRecipeName.Text;
             newRecipe.Ingredients.AddRange(ingredients);
@@ -380,6 +383,9 @@ namespace ST10372065_PROG6221_PART3POE
             btnEnterIngredsandSteps.IsEnabled = true;
 
             recipes.Sort((r1, r2) => r1.RecipeName.CompareTo(r2.RecipeName));
+
+            ingredients.Clear();
+            listDescription.Clear();
         }
 
         private void btnDisplayRecCont_Click(object sender, RoutedEventArgs e)
@@ -443,6 +449,54 @@ namespace ST10372065_PROG6221_PART3POE
             gridRecipeNumber.Visibility = Visibility.Hidden;
             gridScaleValue.Visibility = Visibility.Hidden;
             btnScaleNext.Visibility = Visibility.Hidden;
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            // Check if there are any recipes in the list
+            if (recipes.Count == 0)
+            {
+                textBlockDisplay.Text = "No recipes found. Please enter a recipe first.";
+                return;
+            }
+
+            // Reset each recipe's ingredients to their original values
+            foreach (var recipe in recipes)
+            {
+                recipe.ResetIngredientsToOriginal();
+            }
+
+            MessageBox.Show("All recipes have been reset to their original ingredient quantities and units.");
+        }
+
+        private void SearchMaxCalories_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(textboxMaxCal.Text, out int maxCalories))
+            {
+                textBlockDisplay.Text = string.Empty;
+
+                List<Recipe> filteredRecipes = recipes.Where(recipe =>
+                    recipe.Ingredients.Sum(ingredient =>
+                    int.Parse(ingredient.textboxCalories.Text)) <= maxCalories).ToList();
+
+                if (filteredRecipes.Count > 0)
+                {
+                    StringBuilder recipeListBuilder = new StringBuilder();
+                    for (int i = 0; i < filteredRecipes.Count; i++)
+                    {
+                        recipeListBuilder.AppendLine($"{i + 1}. {filteredRecipes[i].RecipeName}");
+                    }
+                    textBlockDisplay.Text = recipeListBuilder.ToString();
+                }
+                else
+                {
+                    textBlockDisplay.Text = "No recipes found within the specified calorie limit";
+                }
+            }
+            else
+            {
+                textBlockDisplay.Text = "Please enter a valid number for maximum calories";
+            }
         }
     }
 }
